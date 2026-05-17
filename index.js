@@ -667,7 +667,14 @@ const commands = [
         .addIntegerOption(o => o.setName('term').setDescription('Number of cycles').setRequired(true)),
 
     new SlashCommandBuilder().setName('pay').setDescription('Submit payment proof'),
-    new SlashCommandBuilder().setName('credit').setDescription('Check credit score'),
+    new SlashCommandBuilder()
+    .setName('credit')
+    .setDescription('Check credit score')
+    .addUserOption(o =>
+        o.setName('user')
+         .setDescription('User to check')
+         .setRequired(false)
+    ),
     new SlashCommandBuilder().setName('garage').setDescription('View your vehicles'),
 
     new SlashCommandBuilder()
@@ -875,8 +882,14 @@ Credit: ${credit}`,
 
         // CREDIT
         if (interaction.commandName === "credit") {
-            const score = await getCredit(interaction.user.id);
-            return interaction.reply({ content: `📊 Credit Score: ${score}`, ephemeral: true });
+
+    const targetUser = interaction.options.getUser("user") || interaction.user;
+    const score = await getCredit(targetUser.id);
+
+    return interaction.reply({
+        content: `📊 Credit Score for ${targetUser.username}: ${score}`,
+        ephemeral: true
+                });
         }
 
         // GARAGE

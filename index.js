@@ -17,19 +17,8 @@ const sqlite3 = require('sqlite3').verbose();
 const express = require("express");
 const app = express();
 
-// Root route
 app.get("/", (req, res) => {
-    res.status(200).send("Vortex Bot is running.");
-});
-
-// Fallback for everything else
-app.use((req, res) => {
-    res.status(200).send("Vortex Bot is running.");
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Web server running on port ${PORT}`);
+    res.status(200).send("OK");
 });
 
 const PORT = process.env.PORT || 3000;

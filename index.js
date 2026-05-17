@@ -21,6 +21,17 @@ app.get("/", (req, res) => {
     res.send("Vortex Bot is running.");
 });
 
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+    res.status(200).send("Vortex Bot is running.");
+});
+
+app.head("/", (req, res) => {
+    res.sendStatus(200);
+});
+
 app.use((req, res) => {
     res.status(200).send("Vortex Bot is running.");
 });

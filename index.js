@@ -1,4 +1,17 @@
 require('dotenv').config();
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+    res.status(200).send("OK");
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Web server running on port ${PORT}`);
+});
+
 const {
     Client,
     GatewayIntentBits,
@@ -13,18 +26,6 @@ const {
     EmbedBuilder
 } = require('discord.js');
 const sqlite3 = require('sqlite3').verbose();
-
-const express = require("express");
-const app = express();
-
-app.get("/", (req, res) => {
-    res.status(200).send("OK");
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Web server running on port ${PORT}`);
-});
 
 // ================= CLIENT =================
 

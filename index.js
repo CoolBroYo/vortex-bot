@@ -17,7 +17,7 @@ const sqlite3 = require('sqlite3').verbose();
 const express = require("express");
 const app = express();
 
-app.all("*", (req, res) => {
+app.all("/*", (req, res) => {
     res.status(200).send("Vortex Bot is running.");
 });
 

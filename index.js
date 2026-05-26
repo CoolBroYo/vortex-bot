@@ -77,13 +77,6 @@ db.serialize(() => {
         vehicle TEXT,
         status TEXT
     )`);
-
-    db.run(`CREATE TABLE IF NOT EXISTS reminder_tracking (
-        leaseId INTEGER,
-        type TEXT,
-        sent INTEGER,
-        PRIMARY KEY (leaseId, type)
-    )`);
 });
 
 // ================= UTIL =================
@@ -207,7 +200,7 @@ const commands = [
 
     new SlashCommandBuilder()
         .setName('deal')
-        .setDescription('Create lease')
+        .setDescription('Create lease contract')
         .addUserOption(o => o.setName('user').setRequired(true))
         .addStringOption(o => o.setName('vehicle').setRequired(true))
         .addIntegerOption(o => o.setName('total').setRequired(true))
@@ -252,6 +245,8 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
     console.log("✅ Commands registered");
 })();
 
+// ================= INTERACTIONS =================
+
 client.on(Events.InteractionCreate, async interaction => {
 
     if (interaction.isChatInputCommand()) {
@@ -268,7 +263,7 @@ client.on(Events.InteractionCreate, async interaction => {
             const row = new ActionRowBuilder().addComponents(btn);
 
             return interaction.reply({
-                content: `📄 Lease Contract\nBuyer: <@${u.id}>`,
+                content: `📄 **Lease Contract**\nBuyer: <@${u.id}>`,
                 components: [row]
             });
         }
